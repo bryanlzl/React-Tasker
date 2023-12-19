@@ -1,0 +1,44 @@
+.App {
+  font-family: "NunitoSans";
+}
+
+.random-selector {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 50px;
+  font-size: medium;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 30px;
+}
+
+.name-list {
+  font-size: small;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 30px;
+}
+
+.red-text {
+  color: red;
+}
+
+.blue-text {
+  color: blue;
+}
+
+.green-text {
+  color: green;
+}
+
+.default-text {
+  color: gray;
+}
+
+.secret-password-module {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 30px;
+}
