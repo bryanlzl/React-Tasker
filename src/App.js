@@ -1,7 +1,7 @@
-import styles from "./styles/App.module.css";
-import { GetNameComp } from "./TestComponent";
 import React, { useState } from "react";
-import TaskTracker from "./components/taskTracker";
+import { GetNameComp } from "./components/TestComponent/TestComponent";
+import TaskTracker from "./components/TaskTracker/taskTracker";
+import styles from "./styles/App.module.css";
 import "./styles/font.css";
 
 function App() {

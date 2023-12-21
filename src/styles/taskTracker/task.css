@@ -8,16 +8,35 @@
   margin-top: 15px;
 }
 
+.task-entry-header {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.4fr 0.4fr 0.4fr;
+  height: auto;
+  width: 1000px;
+  cursor: pointer;
+}
+
 .task-entry {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 0.4fr 0.4fr;
+  grid-template-columns: 2.6fr 0.4fr 0.4fr 0.4fr;
   height: auto;
   width: 1000px;
 }
 
+.task-entry-values {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr 0.3fr 1fr;
+  height: auto;
+  width: auto
+}
+
+.task-complete {
+  text-decoration: line-through;
+}
+
 .task-edit-form {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 0.4fr 0.4fr;
+  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.4fr 0.4fr 0.4fr;
   height: auto;
   width: 1000px;
   margin-bottom: 10px;
@@ -25,7 +44,7 @@
 
 .task-create-form {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 0.4fr 0.4fr;
+  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.4fr 0.8fr;
   height: auto;
   width: 1000px;
   margin: 20px 0 20px 0;
