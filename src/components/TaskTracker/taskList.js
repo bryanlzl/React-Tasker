@@ -9,7 +9,7 @@ function TaskList(props) {
   let taskKeys = Object.keys(taskList);
   const iTable = {};
   taskKeys.map((key, index) => {
-    iTable[key] = index + 1;
+    iTable[index + 1] = key;
   });
 
   const [sortState, setSortState] = useState({
@@ -20,7 +20,6 @@ function TaskList(props) {
   });
 
   const [currSort, setCurrSort] = useState("index");
-
   const [indexTable, setIndexTable] = useState(iTable);
 
   const taskSortHandler = (sortType, sortAsc) => {
@@ -33,7 +32,7 @@ function TaskList(props) {
           taskKeys = Object.keys(taskKeys).sort((a, b) => b.localeCompare(a));
         }
         taskKeys.map((key, index) => {
-          iTable[key] = index + 1;
+          iTable[index + 1] = key;
         });
         setIndexTable(iTable);
         break;
@@ -80,11 +79,15 @@ function TaskList(props) {
         <div>Completion</div>
       </div>
       {Object.keys(indexTable).map((x) => {
+        console.log(indexTable);
         return (
           <Task
             key={indexTable[x]}
             taskKey={indexTable[x]}
-            taskEntry={{ taskEntry: taskList[x], taskId: x }}
+            taskEntry={{
+              taskEntry: taskList[indexTable[x]],
+              taskId: indexTable[x],
+            }}
             taskChangeHandler={taskChangeHandler}
           />
         );
@@ -92,6 +95,8 @@ function TaskList(props) {
       <TaskForm
         formType="create"
         taskEditHandler={taskChangeHandler}
+        taskSortHandler={taskSortHandler}
+        taskSortState={{ currSort: currSort, sortState: sortState }}
       ></TaskForm>
     </div>
   );

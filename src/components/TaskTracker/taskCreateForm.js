@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/taskTracker/task.css";
 
 function TaskCreateForm(props) {
   // formType == 'create' or 'edit'
   const formType = props.formType;
   const taskEditHandler = props.taskEditHandler;
+  const taskSortHandler = props.taskSortHandler;
+  const { currSort, sortState } = props.taskSortState;
   const taskId = formType === "edit" ? props.taskId : -1;
   const closeEdit = formType === "edit" ? props.isOpen : -1;
   const isCompleted = formType === "edit" ? props.isCompleted : false;
@@ -26,6 +28,10 @@ function TaskCreateForm(props) {
     event.preventDefault();
     taskEditHandler(formType, taskId, taskForm);
   };
+
+  useEffect(() => {
+    taskSortHandler(currSort, sortState["index"]);
+  }, [sortState, currSort, taskEditHandler]);
 
   return (
     <div>
