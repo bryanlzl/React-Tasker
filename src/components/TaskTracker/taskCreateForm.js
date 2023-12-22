@@ -7,13 +7,13 @@ function TaskCreateForm(props) {
   const taskEditHandler = props.taskEditHandler;
   const taskId = formType === "edit" ? props.taskId : -1;
   const closeEdit = formType === "edit" ? props.isOpen : -1;
-  const isCompleted = formType === "edit" ? props.isCompleted : false
+  const isCompleted = formType === "edit" ? props.isCompleted : false;
 
   const [taskForm, setTaskForm] = useState({
     taskName: "",
     priority: "",
     dueDate: new Date(),
-    isCompleted: isCompleted
+    isCompleted: isCompleted,
   });
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -32,7 +32,8 @@ function TaskCreateForm(props) {
       <form
         className={formType === "edit" ? "task-edit-form" : "task-create-form"}
         onSubmit={handleSubmit}
-      ><div/>
+      >
+        <div />
         <input
           type="text"
           name="taskName"
@@ -44,7 +45,7 @@ function TaskCreateForm(props) {
           onChange={handleInputChange}
           defaultValue="Low"
         >
-          <option>Change Priority</option>
+          <option>Change</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
@@ -55,7 +56,7 @@ function TaskCreateForm(props) {
           onChange={handleInputChange}
           defaultValue={new Date()}
         />
-        <div/>
+        <div />
         <button
           onClick={(event) => {
             handleSubmit(event);
