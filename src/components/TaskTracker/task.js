@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TaskForm from "./taskCreateForm";
 import "../../styles/taskTracker/task.css";
 
 function Task(props) {
   const taskChangeHandler = props.taskChangeHandler;
-  const { taskName, taskPriority, dueDate, isCompleted } = props.taskEntry.taskEntry;
+  const { taskName, taskPriority, dueDate, isCompleted } =
+    props.taskEntry.taskEntry;
+
+  const taskSortHandler = props.taskSortHandler;
+  const { currSort, sortState } = props.taskSortState;
   const taskKey = props.taskKey;
   const taskId = props.taskEntry.taskId;
   const [isEdit, setEdit] = useState(false);
-  const strikeThrough = isCompleted && 'task-complete'
+  const strikeThrough = isCompleted && "task-complete";
 
   return (
     <div>
@@ -22,10 +26,10 @@ function Task(props) {
         <input
           type="checkbox"
           onClick={() => {
-            taskChangeHandler('complete', taskId, {});
+            taskChangeHandler("complete", taskId, {});
           }}
-          />
-        <button 
+        />
+        <button
           onClick={() => {
             setEdit(!isEdit);
           }}
@@ -43,7 +47,9 @@ function Task(props) {
             taskId={taskId}
             taskEditHandler={taskChangeHandler}
             isOpen={setEdit}
-            isCompleted = {isCompleted}
+            isCompleted={isCompleted}
+            taskSortHandler={taskSortHandler}
+            taskSortState={{ currSort: currSort, sortState: sortState }}
           ></TaskForm>
         </div>
       )}

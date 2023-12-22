@@ -6,12 +6,17 @@ function TaskTracker() {
   let tempDueDate = new Date();
 
   const [tasks, setTasks] = useState({
-    0: { taskName: "Make bed", taskPriority: "Low", dueDate: tempDueDate, isCompleted: false },
+    0: {
+      taskName: "Make bed",
+      taskPriority: "Low",
+      dueDate: tempDueDate,
+      isCompleted: false,
+    },
     1: {
       taskName: "Make breakfast",
       taskPriority: "High",
       dueDate: tempDueDate,
-      isCompleted: false
+      isCompleted: false,
     },
   });
 
@@ -27,19 +32,19 @@ function TaskTracker() {
     } else if (action === "create") {
       setTasks((prev) => {
         const keysList = Object.keys(prev);
-        const newIdx = keysList.length
-          ? Number(Math.max(...keysList)) + 1
-          : 0;
+        const newIdx = keysList.length ? Number(Math.max(...keysList)) + 1 : 0;
         return { ...prev, [newIdx]: { ...changes } };
       });
     } else if (action === "edit") {
       setTasks((prev) => {
         return { ...prev, [idx]: { ...changes } };
       });
-    }
-    else if (action === "complete") {
+    } else if (action === "complete") {
       setTasks((prev) => {
-        return { ...prev, [idx]: { ...prev[idx], isCompleted: !prev[idx].isCompleted } }
+        return {
+          ...prev,
+          [idx]: { ...prev[idx], isCompleted: !prev[idx].isCompleted },
+        };
       });
     }
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Task from "./task";
 import TaskForm from "./taskCreateForm";
 import "../../styles/taskTracker/task.css";
@@ -7,10 +7,6 @@ function TaskList(props) {
   const taskChangeHandler = props.taskChangeHandler;
   const taskList = props.taskList;
   let taskKeys = Object.keys(taskList);
-  const iTable = {};
-  taskKeys.map((key, index) => {
-    iTable[index + 1] = key;
-  });
 
   const [sortState, setSortState] = useState({
     index: true,
@@ -20,22 +16,20 @@ function TaskList(props) {
   });
 
   const [currSort, setCurrSort] = useState("index");
-  const [indexTable, setIndexTable] = useState(iTable);
 
   const taskSortHandler = (sortType, sortAsc) => {
     const iTable = {};
     switch (sortType) {
       case "index":
         if (sortAsc) {
-          taskKeys = Object.keys(taskKeys).sort();
+          taskKeys = taskKeys.sort();
         } else {
-          taskKeys = Object.keys(taskKeys).sort((a, b) => b.localeCompare(a));
+          taskKeys = taskKeys.sort((a, b) => b.localeCompare(a));
         }
         taskKeys.map((key, index) => {
-          iTable[index + 1] = key;
+          iTable[index + 1] = Number(key);
         });
-        setIndexTable(iTable);
-        break;
+        return iTable;
       case "task":
         if (sortAsc) {
         } else {
@@ -56,9 +50,9 @@ function TaskList(props) {
     }
   };
 
-  useEffect(() => {
-    taskSortHandler(currSort, sortState["index"]);
-  }, [sortState, currSort]);
+  const indexTable = useMemo(() => {
+    return taskSortHandler(currSort, sortState["index"]);
+  }, [taskKeys, currSort, sortState]);
 
   return (
     <div className="task-list">
@@ -79,16 +73,17 @@ function TaskList(props) {
         <div>Completion</div>
       </div>
       {Object.keys(indexTable).map((x) => {
-        console.log(indexTable);
         return (
           <Task
             key={indexTable[x]}
             taskKey={indexTable[x]}
             taskEntry={{
               taskEntry: taskList[indexTable[x]],
-              taskId: indexTable[x],
+              taskId: Number(indexTable[x]),
             }}
             taskChangeHandler={taskChangeHandler}
+            taskSortHandler={taskSortHandler}
+            taskSortState={{ currSort: currSort, sortState: sortState }}
           />
         );
       })}
