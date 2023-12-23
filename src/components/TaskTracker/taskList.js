@@ -6,7 +6,12 @@ import "../../styles/taskTracker/task.css";
 function TaskList(props) {
   const taskChangeHandler = props.taskChangeHandler;
   const taskList = props.taskList;
-  let taskKeys = Object.keys(taskList);
+  let taskKeys = [];
+  Object.keys(taskList)
+    .sort()
+    .map((key, index) => {
+      taskKeys.push([key, index + 1]);
+    });
 
   const [sortState, setSortState] = useState({
     index: true,
@@ -22,12 +27,12 @@ function TaskList(props) {
     switch (sortType) {
       case "index":
         if (sortAsc) {
-          taskKeys = taskKeys.sort();
         } else {
-          taskKeys = taskKeys.sort((a, b) => b.localeCompare(a));
+          taskKeys = taskKeys.sort((a, b) => b[0].localeCompare(a));
         }
         taskKeys.map((key, index) => {
-          iTable[index + 1] = Number(key);
+          iTable[index] = taskKeys[index];
+          index++;
         });
         return iTable;
       case "task":
@@ -51,7 +56,7 @@ function TaskList(props) {
   };
 
   const indexTable = useMemo(() => {
-    return taskSortHandler(currSort, sortState["index"]);
+    return taskSortHandler(currSort, sortState[currSort]);
   }, [taskKeys, currSort, sortState]);
 
   return (
@@ -75,11 +80,11 @@ function TaskList(props) {
       {Object.keys(indexTable).map((x) => {
         return (
           <Task
-            key={indexTable[x]}
-            taskKey={indexTable[x]}
+            key={indexTable[x][1]}
+            taskKey={indexTable[x][1]}
             taskEntry={{
-              taskEntry: taskList[indexTable[x]],
-              taskId: Number(indexTable[x]),
+              taskEntry: taskList[indexTable[x][0]],
+              taskId: Number(indexTable[x][0]),
             }}
             taskChangeHandler={taskChangeHandler}
             taskSortHandler={taskSortHandler}

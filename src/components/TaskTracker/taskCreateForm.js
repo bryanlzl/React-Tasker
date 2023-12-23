@@ -51,7 +51,7 @@ function TaskCreateForm(props) {
           onChange={handleInputChange}
           defaultValue="Low"
         >
-          <option>Change</option>
+          <option value="Low">Change</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
