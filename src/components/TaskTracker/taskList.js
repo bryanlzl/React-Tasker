@@ -6,6 +6,7 @@ import "../../styles/taskTracker/task.css";
 function TaskList(props) {
   const taskChangeHandler = props.taskChangeHandler;
   const taskList = props.taskList;
+  const priorityMap = { Low: 1, Medium: 2, High: 3 };
   let taskKeys = [];
   Object.keys(taskList)
     .sort()
@@ -19,7 +20,6 @@ function TaskList(props) {
     priority: true,
     dueDate: true,
   });
-
   const [currSort, setCurrSort] = useState("index");
 
   const taskSortHandler = (sortType, sortAsc) => {
@@ -52,10 +52,25 @@ function TaskList(props) {
         });
         return iTable;
       case "priority":
-        if (sortAsc) {
-        } else {
+        taskKeys.map((key, index) => {
+          taskKeys[index] = [
+            priorityMap[taskList[key[0]].taskPriority],
+            ...key,
+          ];
+        });
+
+        taskKeys = taskKeys.sort();
+        if (!sortAsc) {
+          taskKeys = taskKeys.reverse();
         }
-        break;
+        taskKeys.map((key, index) => {
+          taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
+        });
+        taskKeys.map((key, index) => {
+          iTable[index] = taskKeys[index];
+          index++;
+        });
+        return iTable;
       case "duedate":
         if (sortAsc) {
         } else {
@@ -95,7 +110,17 @@ function TaskList(props) {
         >
           Task
         </div>
-        <div className="task-header">Priority</div>
+        <div
+          className="task-header"
+          onClick={() => {
+            setSortState((prev) => {
+              return { ...prev, priority: !prev["priority"] };
+            });
+            setCurrSort("priority");
+          }}
+        >
+          Priority
+        </div>
         <div className="task-header">Due Date</div>
         <div className="task-header">Completion</div>
       </div>

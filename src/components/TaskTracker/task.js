@@ -25,9 +25,10 @@ function Task(props) {
         </div>
         <input
           type="checkbox"
-          onClick={() => {
+          onChange={() => {
             taskChangeHandler("complete", taskId, {});
           }}
+          checked={isCompleted}
         />
         <button
           onClick={() => {

@@ -13,7 +13,7 @@ function TaskCreateForm(props) {
 
   const [taskForm, setTaskForm] = useState({
     taskName: "",
-    priority: "",
+    taskPriority: "Low",
     dueDate: new Date(),
     isCompleted: isCompleted,
   });
