@@ -9,19 +9,25 @@ function TaskTracker() {
     0: {
       taskName: "Make bed",
       taskPriority: "Low",
-      dueDate: tempDueDate,
+      dueDate: new Date(tempDueDate.getTime() + 1231286400000),
       isCompleted: false,
     },
     1: {
       taskName: "Breakfast",
       taskPriority: "High",
-      dueDate: tempDueDate,
+      dueDate: new Date(tempDueDate.getTime() + 12382122460),
       isCompleted: false,
     },
     2: {
       taskName: "Popcorn",
       taskPriority: "Medium",
-      dueDate: tempDueDate,
+      dueDate: new Date(tempDueDate.getTime() + 8645500),
+      isCompleted: false,
+    },
+    3: {
+      taskName: "Watch movie",
+      taskPriority: "Low",
+      dueDate: new Date(tempDueDate.getTime() + 81201233123),
       isCompleted: false,
     },
   });

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import { enGB } from "date-fns/locale";
+import "react-datepicker/dist/react-datepicker.css";
 import "../../styles/taskTracker/task.css";
 
 function TaskCreateForm(props) {
@@ -56,13 +59,23 @@ function TaskCreateForm(props) {
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
-        <input
+
+        <DatePicker
+          className="my-custom-datepicker"
           type="date"
           name="dueDate"
-          onChange={handleInputChange}
-          defaultValue={new Date()}
+          selected={taskForm.dueDate}
+          locale={enGB}
+          onChange={(event) =>
+            handleInputChange({ target: { name: "dueDate", value: event } })
+          }
+          timeInputLabel="Time:"
+          dateFormat="dd/MM/yyyy h:mm a"
+          showTimeInput
         />
+
         <div />
+
         <button
           onClick={(event) => {
             handleSubmit(event);

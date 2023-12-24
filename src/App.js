@@ -5,6 +5,7 @@ import styles from "./styles/App.module.css";
 import "./styles/font.css";
 
 function App() {
+  const [hidePractice, setHidePractice] = useState(true);
   const userStats1 = {
     name: "Bryan",
     age: 21,
@@ -61,33 +62,46 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <div className={styles["random-selector"]}>
-        <span>
-          <button onClick={pickUserRandom}>Pick random user</button>
-          <button onClick={increaseAge}>+1 age</button>
-        </span>
-        <GetNameComp content={userDB[userStat]} iStyle={colourEval(userStat)} />
-      </div>
-      <div className={styles["name-list"]}>
-        <h2>user Database where (age >= 20):</h2>
-        {Object.keys(userDB).map((x) => {
-          if (userDB[x].age >= 20) {
-            return (
-              <GetNameComp key={x} content={userDB[x]} iStyle={colourEval(x)} />
-            );
-          }
-        })}
-      </div>
-      <div className={styles["secret-password-module"]}>
-        <h2>Secret password input ('secret_password'):</h2>
-        <input
-          onChange={(x) => {
-            setTestString(x.target.value);
-          }}
-        ></input>
-        {testString === "secret_password" && <p>Password is correct</p>}
-      </div>
-
+      <button onClick={() => setHidePractice(!hidePractice)}>
+        {hidePractice ? "Show Practice" : "Hide Practice"}
+      </button>
+      {!hidePractice && (
+        <div>
+          <div className={styles["random-selector"]}>
+            <span>
+              <button onClick={pickUserRandom}>Pick random user</button>
+              <button onClick={increaseAge}>+1 age</button>
+            </span>
+            <GetNameComp
+              content={userDB[userStat]}
+              iStyle={colourEval(userStat)}
+            />
+          </div>
+          <div className={styles["name-list"]}>
+            <h2>user Database where (age >= 20):</h2>
+            {Object.keys(userDB).map((x) => {
+              if (userDB[x].age >= 20) {
+                return (
+                  <GetNameComp
+                    key={x}
+                    content={userDB[x]}
+                    iStyle={colourEval(x)}
+                  />
+                );
+              }
+            })}
+          </div>
+          <div className={styles["secret-password-module"]}>
+            <h2>Secret password input ('secret_password'):</h2>
+            <input
+              onChange={(x) => {
+                setTestString(x.target.value);
+              }}
+            ></input>
+            {testString === "secret_password" && <p>Password is correct</p>}
+          </div>
+        </div>
+      )}
       <TaskTracker />
     </div>
   );

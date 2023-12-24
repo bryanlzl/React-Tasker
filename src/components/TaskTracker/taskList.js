@@ -13,7 +13,6 @@ function TaskList(props) {
     .map((key, index) => {
       taskKeys.push([key, index + 1]);
     });
-
   const [sortState, setSortState] = useState({
     index: true,
     task: true,
@@ -21,6 +20,12 @@ function TaskList(props) {
     dueDate: true,
   });
   const [currSort, setCurrSort] = useState("index");
+
+  const sortByDate = (key1, key2) => {
+    const dueDate1 = key1[0];
+    const dueDate2 = key2[0];
+    return dueDate2 - dueDate1;
+  };
 
   const taskSortHandler = (sortType, sortAsc) => {
     const iTable = {};
@@ -43,13 +48,10 @@ function TaskList(props) {
         if (!sortAsc) {
           taskKeys = taskKeys.reverse();
         }
-        taskKeys.map((key, index) => {
+        for (let index = 0; index < taskKeys.length; index++) {
           taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
-        });
-        taskKeys.map((key, index) => {
           iTable[index] = taskKeys[index];
-          index++;
-        });
+        }
         return iTable;
       case "priority":
         taskKeys.map((key, index) => {
@@ -58,24 +60,28 @@ function TaskList(props) {
             ...key,
           ];
         });
-
         taskKeys = taskKeys.sort();
         if (!sortAsc) {
           taskKeys = taskKeys.reverse();
         }
-        taskKeys.map((key, index) => {
+        for (let index = 0; index < taskKeys.length; index++) {
           taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
-        });
-        taskKeys.map((key, index) => {
           iTable[index] = taskKeys[index];
-          index++;
-        });
-        return iTable;
-      case "duedate":
-        if (sortAsc) {
-        } else {
         }
-        break;
+        return iTable;
+      case "dueDate":
+        taskKeys.map((key, index) => {
+          taskKeys[index] = [taskList[key[0]].dueDate, ...key];
+        });
+        taskKeys = taskKeys.sort(sortByDate);
+        if (!sortAsc) {
+          taskKeys = taskKeys.reverse();
+        }
+        for (let index = 0; index < taskKeys.length; index++) {
+          taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
+          iTable[index] = taskKeys[index];
+        }
+        return iTable;
       default:
         console.log("what the....");
     }
@@ -121,8 +127,18 @@ function TaskList(props) {
         >
           Priority
         </div>
-        <div className="task-header">Due Date</div>
-        <div className="task-header">Completion</div>
+        <div
+          className="task-header"
+          onClick={() => {
+            setSortState((prev) => {
+              return { ...prev, dueDate: !prev["dueDate"] };
+            });
+            setCurrSort("dueDate");
+          }}
+        >
+          Due Date & Time
+        </div>
+        <div className="task-header">Completed</div>
       </div>
       {Object.keys(indexTable).map((x) => {
         return (

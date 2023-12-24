@@ -21,9 +21,18 @@ function Task(props) {
           <div>{taskKey}</div>
           <div>{taskName}</div>
           <div>{taskPriority}</div>
-          <div>{dueDate.toLocaleString()}</div>
+          <div>
+            {dueDate.toLocaleString([], {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </div>
         </div>
         <input
+          className="task-checkbox"
           type="checkbox"
           onChange={() => {
             taskChangeHandler("complete", taskId, {});

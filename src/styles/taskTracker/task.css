@@ -10,7 +10,7 @@
 
 .task-entry-header {
   display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.4fr 0.4fr 0.4fr;
+  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr 0.3fr 0.4fr 0.4fr;
   height: auto;
   width: 1000px;
   cursor: pointer;
@@ -18,14 +18,14 @@
 
 .task-entry {
   display: grid;
-  grid-template-columns: 2.6fr 0.4fr 0.4fr 0.4fr;
+  grid-template-columns: 2.2fr 0.3fr 0.4fr 0.4fr;
   height: auto;
   width: 1000px;
 }
 
 .task-entry-values {
   display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 1fr;
+  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr;
   height: auto;
   width: auto;
 }
@@ -36,7 +36,7 @@
 
 .task-edit-form {
   display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.4fr 0.4fr 0.4fr;
+  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr 0.3fr 0.4fr 0.4fr;
   height: auto;
   width: 1000px;
   margin-bottom: 10px;
@@ -44,7 +44,7 @@
 
 .task-create-form {
   display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.4fr 0.8fr;
+  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr 0.3fr 0.8fr;
   height: auto;
   width: 1000px;
   margin: 20px 0 20px 0;
@@ -57,4 +57,8 @@
 .task-header:hover {
   border-radius: 5px;
   background-color: rgb(235, 235, 235);
+}
+
+.task-checkbox {
+  width: 85px;
 }
