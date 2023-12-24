@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import Task from "./task";
 import TaskForm from "./taskCreateForm";
 import "../../styles/taskTracker/task.css";
@@ -7,89 +7,75 @@ function TaskList(props) {
   const taskChangeHandler = props.taskChangeHandler;
   const taskList = props.taskList;
   const priorityMap = { Low: 1, Medium: 2, High: 3 };
-  let taskKeys = [];
-  Object.keys(taskList)
+  let taskKeys = Object.keys(taskList)
     .sort()
-    .map((key, index) => {
-      taskKeys.push([key, index + 1]);
-    });
+    .map((key, index) => [key, index + 1]);
   const [sortState, setSortState] = useState({
     index: true,
     task: true,
     priority: true,
     dueDate: true,
+    completed: true,
   });
-  const [currSort, setCurrSort] = useState("index");
-
   const sortByDate = (key1, key2) => {
     const dueDate1 = key1[0];
     const dueDate2 = key2[0];
     return dueDate2 - dueDate1;
   };
+  const [currSort, setCurrSort] = useState("index");
 
   const taskSortHandler = (sortType, sortAsc) => {
-    const iTable = {};
+    let iTable = {};
+    const iTableCompiler = () => {
+      taskKeys = taskKeys.map((key) => [key[1], key[2]]);
+      iTable = taskKeys.map((key) => key);
+    };
     switch (sortType) {
       case "index":
         if (sortAsc) {
         } else {
           taskKeys = taskKeys.reverse();
         }
-        taskKeys.map((key, index) => {
-          iTable[index] = taskKeys[index];
-          index++;
-        });
+        iTable = taskKeys.map((key) => key);
         return iTable;
       case "task":
-        taskKeys.map((key, index) => {
-          taskKeys[index] = [taskList[key[0]].taskName, ...key];
-        });
-        taskKeys = taskKeys.sort();
-        if (!sortAsc) {
-          taskKeys = taskKeys.reverse();
-        }
-        for (let index = 0; index < taskKeys.length; index++) {
-          taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
-          iTable[index] = taskKeys[index];
-        }
+        taskKeys = taskKeys
+          .map((key) => [taskList[key[0]].taskName, ...key])
+          .sort();
+        taskKeys = !sortAsc ? taskKeys.reverse() : taskKeys;
+        iTableCompiler();
         return iTable;
       case "priority":
-        taskKeys.map((key, index) => {
-          taskKeys[index] = [
-            priorityMap[taskList[key[0]].taskPriority],
-            ...key,
-          ];
-        });
-        taskKeys = taskKeys.sort();
-        if (!sortAsc) {
-          taskKeys = taskKeys.reverse();
-        }
-        for (let index = 0; index < taskKeys.length; index++) {
-          taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
-          iTable[index] = taskKeys[index];
-        }
+        taskKeys = taskKeys
+          .map((key) => [priorityMap[taskList[key[0]].taskPriority], ...key])
+          .sort();
+        taskKeys = !sortAsc ? taskKeys.reverse() : taskKeys;
+        iTableCompiler();
         return iTable;
       case "dueDate":
-        taskKeys.map((key, index) => {
-          taskKeys[index] = [taskList[key[0]].dueDate, ...key];
-        });
-        taskKeys = taskKeys.sort(sortByDate);
-        if (!sortAsc) {
-          taskKeys = taskKeys.reverse();
-        }
-        for (let index = 0; index < taskKeys.length; index++) {
-          taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
-          iTable[index] = taskKeys[index];
-        }
+        taskKeys = taskKeys
+          .map((key) => [taskList[key[0]].dueDate, ...key])
+          .sort(sortByDate);
+        taskKeys = !sortAsc ? taskKeys.reverse() : taskKeys;
+        iTableCompiler();
+        return iTable;
+      case "completed":
+        taskKeys = taskKeys
+          .map((key) => [taskList[key[0]].isCompleted, ...key])
+          .sort();
+        taskKeys = !sortAsc ? taskKeys.reverse() : taskKeys;
+        iTableCompiler();
         return iTable;
       default:
         console.log("what the....");
     }
   };
 
+  /* eslint-enable react-hooks/exhaustive-deps */
   const indexTable = useMemo(() => {
     return taskSortHandler(currSort, sortState[currSort]);
   }, [taskKeys, currSort, sortState]);
+  /* eslint-disable react-hooks/exhaustive-deps */
 
   return (
     <div className="task-list">
@@ -138,7 +124,17 @@ function TaskList(props) {
         >
           Due Date & Time
         </div>
-        <div className="task-header">Completed</div>
+        <div
+          className="task-header"
+          onClick={() => {
+            setSortState((prev) => {
+              return { ...prev, completed: !prev["completed"] };
+            });
+            setCurrSort("completed");
+          }}
+        >
+          Completed
+        </div>
       </div>
       {Object.keys(indexTable).map((x) => {
         return (

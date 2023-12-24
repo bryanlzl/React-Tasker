@@ -80,15 +80,15 @@ function App() {
           <div className={styles["name-list"]}>
             <h2>user Database where (age >= 20):</h2>
             {Object.keys(userDB).map((x) => {
-              if (userDB[x].age >= 20) {
-                return (
+              return (
+                userDB[x].age >= 20 && (
                   <GetNameComp
                     key={x}
                     content={userDB[x]}
                     iStyle={colourEval(x)}
                   />
-                );
-              }
+                )
+              );
             })}
           </div>
           <div className={styles["secret-password-module"]}>

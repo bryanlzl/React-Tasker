@@ -63,11 +63,13 @@ function TaskTracker() {
 
   return (
     <div className="task-tracker">
-      <h2>To-do List Maker:</h2>
-      <TaskList
-        taskList={tasks}
-        taskChangeHandler={taskChangeHandler}
-      ></TaskList>
+      <div className="task-tracker-content">
+        <h2>To-do List Maker:</h2>
+        <TaskList
+          taskList={tasks}
+          taskChangeHandler={taskChangeHandler}
+        ></TaskList>
+      </div>
     </div>
   );
 }

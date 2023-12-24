@@ -4,6 +4,10 @@
   margin-top: 30px;
 }
 
+.task-tracker-content {
+  margin: 0 15px 0 15px;
+}
+
 .task-list {
   margin-top: 15px;
 }
