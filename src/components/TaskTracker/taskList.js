@@ -28,7 +28,7 @@ function TaskList(props) {
       case "index":
         if (sortAsc) {
         } else {
-          taskKeys = taskKeys.sort((a, b) => b[0].localeCompare(a));
+          taskKeys = taskKeys.reverse();
         }
         taskKeys.map((key, index) => {
           iTable[index] = taskKeys[index];
@@ -36,10 +36,21 @@ function TaskList(props) {
         });
         return iTable;
       case "task":
-        if (sortAsc) {
-        } else {
+        taskKeys.map((key, index) => {
+          taskKeys[index] = [taskList[key[0]].taskName, ...key];
+        });
+        taskKeys = taskKeys.sort();
+        if (!sortAsc) {
+          taskKeys = taskKeys.reverse();
         }
-        break;
+        taskKeys.map((key, index) => {
+          taskKeys[index] = [taskKeys[index][1], taskKeys[index][2]];
+        });
+        taskKeys.map((key, index) => {
+          iTable[index] = taskKeys[index];
+          index++;
+        });
+        return iTable;
       case "priority":
         if (sortAsc) {
         } else {
@@ -63,6 +74,7 @@ function TaskList(props) {
     <div className="task-list">
       <div className={"task-entry-header task-column-header"}>
         <div
+          className="task-header"
           onClick={() => {
             setSortState((prev) => {
               return { ...prev, index: !prev["index"] };
@@ -72,10 +84,20 @@ function TaskList(props) {
         >
           Index
         </div>
-        <div>Task</div>
-        <div>Priority</div>
-        <div>Due Date</div>
-        <div>Completion</div>
+        <div
+          className="task-header"
+          onClick={() => {
+            setSortState((prev) => {
+              return { ...prev, task: !prev["task"] };
+            });
+            setCurrSort("task");
+          }}
+        >
+          Task
+        </div>
+        <div className="task-header">Priority</div>
+        <div className="task-header">Due Date</div>
+        <div className="task-header">Completion</div>
       </div>
       {Object.keys(indexTable).map((x) => {
         return (

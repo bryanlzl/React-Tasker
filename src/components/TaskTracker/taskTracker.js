@@ -13,8 +13,14 @@ function TaskTracker() {
       isCompleted: false,
     },
     1: {
-      taskName: "Make breakfast",
+      taskName: "Breakfast",
       taskPriority: "High",
+      dueDate: tempDueDate,
+      isCompleted: false,
+    },
+    2: {
+      taskName: "Popcorn",
+      taskPriority: "Medium",
       dueDate: tempDueDate,
       isCompleted: false,
     },

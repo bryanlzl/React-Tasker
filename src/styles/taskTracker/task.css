@@ -53,3 +53,8 @@
 .task-column-header {
   font-weight: bold;
 }
+
+.task-header:hover {
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
+}
