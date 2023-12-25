@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TaskList from "./taskList";
 import "../../styles/taskTracker/task.css";
 
@@ -37,9 +37,14 @@ function TaskTracker() {
     // CREATE == changes is a dict of the new task
     if (action === "delete") {
       setTasks((prev) => {
-        const curr = { ...prev };
-        delete curr[idx];
-        return curr;
+        const filteredTasks = Object.entries(prev)
+          .filter((key) => parseInt(key) !== idx)
+          .map(([, value]) => value);
+        const newTasks = {};
+        filteredTasks.forEach((task, index) => {
+          newTasks[index] = task;
+        });
+        return newTasks;
       });
     } else if (action === "create") {
       setTasks((prev) => {
@@ -60,6 +65,10 @@ function TaskTracker() {
       });
     }
   };
+
+  /*useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);*/
 
   return (
     <div className="task-tracker">
