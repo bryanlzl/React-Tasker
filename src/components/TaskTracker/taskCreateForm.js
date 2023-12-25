@@ -13,13 +13,13 @@ function TaskCreateForm(props) {
   const taskId = formType === "edit" ? props.taskId : -1;
   const closeEdit = formType === "edit" ? props.isOpen : -1;
   const isCompleted = formType === "edit" ? props.isCompleted : false;
-
   const [taskForm, setTaskForm] = useState({
     taskName: "",
     taskPriority: "Low",
     dueDate: new Date(),
     isCompleted: isCompleted,
   });
+
   const handleInputChange = (event) => {
     let { name, value } = event.target;
     value = name === "dueDate" ? new Date(value) : value;
@@ -73,9 +73,7 @@ function TaskCreateForm(props) {
           dateFormat="dd/MM/yyyy h:mm a"
           showTimeInput
         />
-
         <div />
-
         <button
           onClick={(event) => {
             handleSubmit(event);

@@ -40,7 +40,7 @@ function TaskList(props) {
         return iTable;
       case "task":
         taskKeys = taskKeys
-          .map((key) => [taskList[key[0]].taskName, ...key])
+          .map((key) => [taskList[key[0]].taskName.toUpperCase(), ...key])
           .sort();
         taskKeys = !sortAsc ? taskKeys.reverse() : taskKeys;
         iTableCompiler();
