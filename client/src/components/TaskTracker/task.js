@@ -22,12 +22,13 @@ function Task(props) {
           <div>{taskName}</div>
           <div>{taskPriority}</div>
           <div>
-            {dueDate.toLocaleString([], {
+            {dueDate.toLocaleString("en-US", {
               day: "2-digit",
               month: "2-digit",
               year: "numeric",
               hour: "2-digit",
               minute: "2-digit",
+              hour12: true,
             })}
           </div>
         </div>
