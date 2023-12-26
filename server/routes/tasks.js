@@ -12,6 +12,34 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/update", async (req, res) => {
+  try {
+    const rawSQLTable = req.body;
+    const taskSQLTable = Object.entries(rawSQLTable).map(([key, value]) => ({
+      task_idx: key,
+      task_name: value.taskName,
+      task_priority: value.taskPriority,
+      due_date: value.dueDate,
+      is_completed: value.isCompleted,
+    }));
+
+    await pool.query("BEGIN");
+    await pool.query("TRUNCATE TABLE tasks RESTART IDENTITY");
+    for (const task of taskSQLTable) {
+      await pool.query(
+        "INSERT INTO tasks (task_name, task_priority, due_date, is_completed) VALUES ($1, $2, $3, $4)",
+        [task.task_name, task.task_priority, task.due_date, task.is_completed]
+      );
+    }
+    await pool.query("COMMIT");
+    res.json({ message: "Task table updated successfully" });
+  } catch (err) {
+    await pool.query("ROLLBACK");
+    console.error(err);
+    res.json(err);
+  }
+});
+
 module.exports = router;
 
 /*const taskList = {
@@ -40,3 +68,13 @@ module.exports = router;
     isCompleted: false,
   },
 };*/
+
+/*
+{
+      task_idx: key,
+      task_name: value.taskName,
+      task_priority: value.taskPriority,
+      due_date: value.dueDate.toISOtring(),
+      is_completed: value.isCompleted,
+    }
+*/

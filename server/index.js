@@ -3,9 +3,11 @@ const cors = require("cors");
 const app = express();
 const port = 5000;
 
-const taskRoutes = require("./routes/tasks");
-
+app.use(express.json()); // Parse JSON request bodies
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+const taskRoutes = require("./routes/tasks");
 
 app.use("/api/tasks", taskRoutes);
 
