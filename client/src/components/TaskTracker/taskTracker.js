@@ -46,7 +46,12 @@ function TaskTracker() {
       .then((res) => {
         const taskList = {};
         Object.entries(res.data).forEach(([key, value]) => {
-          taskList[key] = { ...value, dueDate: new Date(value.dueDate) };
+          taskList[key] = {
+            taskName: value.task_name,
+            taskPriority: value.task_priority,
+            dueDate: new Date(value.due_date),
+            isCompleted: value.is_completed,
+          };
         });
         setTasks({ ...taskList });
       })
