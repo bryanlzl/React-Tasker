@@ -1,71 +1,65 @@
-.task-tracker {
-  border-style: solid;
-  border-width: 1px;
-  margin-top: 30px;
-}
+@import "taskTrackerPalette.css";
 
-.task-tracker-content {
-  margin: 0 15px 0 15px;
-}
-
-.task-list {
-  margin-top: 15px;
-}
-
-.task-entry-header {
-  display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr 0.3fr 0.4fr 0.4fr;
-  height: auto;
-  width: 1000px;
-  cursor: pointer;
+.task {
+  margin: 8px 0 8px 0;
+  padding: 3px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 2px 2px 4px #cccccc;
 }
 
 .task-entry {
   display: grid;
-  grid-template-columns: 2.2fr 0.3fr 0.4fr 0.4fr;
+  grid-template-columns: 2fr 0.25fr 0.4fr 0.4fr;
   height: auto;
   width: 1000px;
+  align-items: center;
 }
 
 .task-entry-values {
   display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr;
+  grid-template-columns: 0.3fr 0.8fr 0.3fr 0.6fr;
   height: auto;
   width: auto;
 }
 
-.task-complete {
-  text-decoration: line-through;
+.task-title {
+  margin: 10px 0 10px 0;
+  padding: 0 0 5px 0;
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-color: rgb(156, 156, 156);
+  font-weight: bolder;
+  font-size: x-large;
 }
 
-.task-edit-form {
-  display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr 0.3fr 0.4fr 0.4fr;
-  height: auto;
-  width: 1000px;
-  margin-bottom: 10px;
-}
-
-.task-create-form {
-  display: grid;
-  grid-template-columns: 0.3fr 1fr 0.3fr 0.6fr 0.3fr 0.8fr;
-  height: auto;
-  width: 1000px;
-  margin: 20px 0 20px 0;
+.task-checkbox {
+  width: 70px;
 }
 
 .task-column-header {
   font-weight: bold;
 }
 
-.task-header:hover {
-  border-radius: 5px;
-  background-color: rgb(235, 235, 235);
+.task-complete {
+  text-decoration: line-through;
 }
 
-.task-checkbox {
-  width: 85px;
+.edit-remove-button {
+  border: none;
+  border-radius: 11px;
+  background-color: transparent;
+  max-width: 20px;
+  max-height: 20px;
+  padding: 0;
+  margin: 0 5px 0 5px;
 }
 
-.task-save-change-button {
+.edit-remove-button:hover {
+  box-shadow: 2px 2px 4px #9e9e9e;
+}
+
+.edit-remove-icon {
+  max-width: 20px;
+  cursor: pointer;
 }

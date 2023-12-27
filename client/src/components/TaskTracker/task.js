@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import TaskForm from "./taskCreateForm";
+import editIcon from "../../assets/icons/edit-icon.svg";
+import deleteIcon from "../../assets/icons/delete-icon.svg";
 import "../../styles/taskTracker/task.css";
+import "../../styles/taskTracker/taskCreateForm.css";
 
 function Task(props) {
   const taskChangeHandler = props.taskChangeHandler;
@@ -15,7 +18,7 @@ function Task(props) {
   const strikeThrough = isCompleted && "task-complete";
 
   return (
-    <div>
+    <div className="task">
       <div className="task-entry">
         <div className={`task-entry-values ${strikeThrough}`}>
           <div>{taskKey}</div>
@@ -41,14 +44,22 @@ function Task(props) {
           checked={isCompleted}
         />
         <button
+          className="edit-remove-button"
           onClick={() => {
             setEdit(!isEdit);
           }}
         >
-          Edit
+          <img className="edit-remove-icon" alt="edit-icon" src={editIcon} />
         </button>
-        <button onClick={() => taskChangeHandler("delete", taskId, {})}>
-          Delete
+        <button
+          className="edit-remove-button"
+          onClick={() => taskChangeHandler("delete", taskId, {})}
+        >
+          <img
+            className="edit-remove-icon"
+            alt="delete-icon"
+            src={deleteIcon}
+          />
         </button>
       </div>
       {isEdit && (
@@ -61,7 +72,7 @@ function Task(props) {
             isCompleted={isCompleted}
             taskSortHandler={taskSortHandler}
             taskSortState={{ currSort: currSort, sortState: sortState }}
-          ></TaskForm>
+          />
         </div>
       )}
     </div>

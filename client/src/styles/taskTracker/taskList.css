@@ -1,0 +1,28 @@
+@import "taskTrackerPalette.css";
+
+.task-list {
+  margin-top: 10px;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-header:hover {
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
+}
+
+.task-entry-header {
+  display: grid;
+  grid-template-columns: 0.3fr 0.8fr 0.3fr 0.6fr 0.25fr 0.4fr 0.4fr;
+  height: auto;
+  width: 1000px;
+  cursor: pointer;
+}
+
+.sort-arrow-icon {
+  max-width: 10px;
+  margin-right: 10px;
+}

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import { enGB } from "date-fns/locale";
+import checkIcon from "../../assets/icons/check-tick-icon.svg";
+import cancelIcon from "../../assets/icons/cancel-icon.svg";
 import "react-datepicker/dist/react-datepicker.css";
-import "../../styles/taskTracker/task.css";
+import "../../styles/taskTracker/taskCreateForm.css";
 
 function TaskCreateForm(props) {
   // formType == 'create' or 'edit'
@@ -75,22 +77,36 @@ function TaskCreateForm(props) {
         />
         <div />
         <button
+          className={formType === "edit" && "confirm-cancel-button"}
           onClick={(event) => {
             handleSubmit(event);
             formType === "edit" && closeEdit(false);
           }}
         >
-          {formType === "edit" ? "Confirm" : "Create Task"}
+          {formType === "edit" ? (
+            <img
+              className="confirm-cancel-icon"
+              alt="check-icon"
+              src={checkIcon}
+            />
+          ) : (
+            "Create Task"
+          )}
         </button>
         {formType === "edit" && (
           <button
+            className="confirm-cancel-button"
             onClick={() => {
               closeEdit((prev) => {
                 return !prev;
               });
             }}
           >
-            Cancel
+            <img
+              className="confirm-cancel-icon"
+              alt="check-icon"
+              src={cancelIcon}
+            />
           </button>
         )}
       </form>

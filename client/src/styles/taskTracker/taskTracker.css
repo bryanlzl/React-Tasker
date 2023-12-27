@@ -1,0 +1,19 @@
+@import "taskTrackerPalette.css";
+
+.task-tracker {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 20px;
+  border-color: var(--color2);
+  margin-top: 20px;
+  width: 1020px;
+  background-color: var(--color2);
+}
+
+.task-tracker-content {
+  margin: 0 10px 0 10px;
+}
+
+.task-save-change {
+  margin: 10px 0 10px 10px;
+}

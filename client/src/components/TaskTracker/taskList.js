@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import Task from "./task";
 import TaskForm from "./taskCreateForm";
-import "../../styles/taskTracker/task.css";
+import "../../styles/taskTracker/taskList.css";
+import ascIcon from "../../assets/icons/asc-arrow.svg";
+import descIcon from "../../assets/icons/desc-arrow.svg";
 
 function TaskList(props) {
   const taskChangeHandler = props.taskChangeHandler;
@@ -23,6 +25,17 @@ function TaskList(props) {
     return dueDate2 - dueDate1;
   };
   const [currSort, setCurrSort] = useState("index");
+
+  const renderSortArrow = (sortType) => {
+    return (
+      currSort === sortType &&
+      (sortState[currSort] ? (
+        <img className="sort-arrow-icon" alt="asc-arrow" src={ascIcon} />
+      ) : (
+        <img className="sort-arrow-icon" alt="desc-arrow" src={descIcon} />
+      ))
+    );
+  };
 
   const taskSortHandler = (sortType, sortAsc) => {
     let iTable = {};
@@ -90,6 +103,7 @@ function TaskList(props) {
           }}
         >
           Index
+          {renderSortArrow("index")}
         </div>
         <div
           className="task-header"
@@ -101,6 +115,7 @@ function TaskList(props) {
           }}
         >
           Task
+          {renderSortArrow("task")}
         </div>
         <div
           className="task-header"
@@ -112,6 +127,7 @@ function TaskList(props) {
           }}
         >
           Priority
+          {renderSortArrow("priority")}
         </div>
         <div
           className="task-header"
@@ -123,6 +139,7 @@ function TaskList(props) {
           }}
         >
           Due Date & Time
+          {renderSortArrow("dueDate")}
         </div>
         <div
           className="task-header"
@@ -133,7 +150,8 @@ function TaskList(props) {
             setCurrSort("completed");
           }}
         >
-          Completed
+          Done
+          {renderSortArrow("completed")}
         </div>
       </div>
       {Object.keys(indexTable).map((x) => {

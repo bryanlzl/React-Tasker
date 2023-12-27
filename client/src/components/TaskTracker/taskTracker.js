@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TaskList from "./taskList";
 import axios from "axios";
-import "../../styles/taskTracker/task.css";
+import "../../styles/taskTracker/taskTracker.css";
 
 function TaskTracker() {
   const [tasks, setTasks] = useState({});
@@ -69,12 +69,12 @@ function TaskTracker() {
   return (
     <div className="task-tracker">
       <div className="task-tracker-content">
-        <h2>To-do List Maker:</h2>
+        <h1 className="task-title">To-Do List:</h1>
         <TaskList
           taskList={tasks}
           taskChangeHandler={taskChangeHandler}
         ></TaskList>
-        <div>
+        <div className="task-save-change">
           <button onClick={saveChangeHandler}>Save Changes</button>
           <button onClick={fetchDBTasks}>Discard Changes</button>
         </div>
