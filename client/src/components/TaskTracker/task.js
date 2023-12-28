@@ -42,7 +42,7 @@ function Task(props) {
           <div>{taskName}</div>
           <div>{taskPriority}</div>
           <div>
-            {dueDate.toLocaleString("en-US", {
+            {dueDate.toLocaleString("en-SG", {
               day: "2-digit",
               month: "2-digit",
               year: "numeric",
