@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import TaskForm from "./taskCreateForm";
 import editIcon from "../../assets/icons/edit-icon.svg";
 import deleteIcon from "../../assets/icons/delete-icon.svg";
+import checkIcon from "../../assets/icons/check-tick-icon.svg";
+import emptyCircleIcon from "../../assets/icons/empty-circle-icon.svg";
 import "../../styles/taskTracker/task.css";
 import "../../styles/taskTracker/taskCreateForm.css";
 
@@ -16,12 +18,27 @@ function Task(props) {
   const taskId = props.taskEntry.taskId;
   const [isEdit, setEdit] = useState(false);
   const strikeThrough = isCompleted && "task-complete";
+  const renderCheck = () => {
+    return isCompleted ? (
+      <img
+        alt="empty-circle-icon"
+        className="custom-checkbox"
+        src={checkIcon}
+      />
+    ) : (
+      <img
+        alt="empty-circle-icon"
+        className="custom-checkbox"
+        src={emptyCircleIcon}
+      />
+    );
+  };
 
   return (
     <div className="task">
       <div className="task-entry">
         <div className={`task-entry-values ${strikeThrough}`}>
-          <div>{taskKey}</div>
+          <div className="task-index-entry">{taskKey}</div>
           <div>{taskName}</div>
           <div>{taskPriority}</div>
           <div>
@@ -35,7 +52,9 @@ function Task(props) {
             })}
           </div>
         </div>
+
         <input
+          id={`taskCheckBox${taskKey}`}
           className="task-checkbox"
           type="checkbox"
           onChange={() => {
@@ -43,6 +62,11 @@ function Task(props) {
           }}
           checked={isCompleted}
         />
+
+        <label htmlFor={`taskCheckBox${taskKey}`} className="custom-checkbox">
+          {renderCheck()}
+        </label>
+
         <button
           className="edit-remove-button"
           onClick={() => {
@@ -51,6 +75,7 @@ function Task(props) {
         >
           <img className="edit-remove-icon" alt="edit-icon" src={editIcon} />
         </button>
+
         <button
           className="edit-remove-button"
           onClick={() => taskChangeHandler("delete", taskId, {})}

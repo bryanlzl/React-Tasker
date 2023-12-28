@@ -2,11 +2,44 @@
 
 .task-list {
   margin-top: 10px;
+  width: 800px;
 }
 
 .task-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
+}
+
+.task-header-sort {
+  display: flex;
+  justify-content: left;
+  background-color: rgb(235, 235, 235);
+  border-radius: 5px;
+}
+
+.index-header-sort {
+  width: 58px;
+}
+.task-name-header-sort {
+  width: 270px;
+}
+.priority-header-sort {
+  width: 90px;
+}
+.date-header-sort {
+  width: 190px;
+}
+.completed-header-sort {
+  width: 60px;
+}
+
+.task-column-header {
+  padding: 3px;
+  font-weight: bold;
+}
+
+.task-done-header {
+  margin: 0;
 }
 
 .task-header:hover {
@@ -16,13 +49,12 @@
 
 .task-entry-header {
   display: grid;
-  grid-template-columns: 0.3fr 0.8fr 0.3fr 0.6fr 0.25fr 0.4fr 0.4fr;
+  grid-template-columns: 65px 280px 100px 200px 70px;
   height: auto;
-  width: 1000px;
   cursor: pointer;
 }
 
 .sort-arrow-icon {
   max-width: 10px;
-  margin-right: 10px;
+  margin: 0 5px 0 5px;
 }

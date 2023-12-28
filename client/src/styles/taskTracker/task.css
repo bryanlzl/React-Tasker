@@ -4,41 +4,38 @@
   margin: 8px 0 8px 0;
   padding: 3px;
   border-radius: 12px;
-  background-color: white;
-  box-shadow: 2px 2px 4px #cccccc;
+  background-color: var(--color1);
+  box-shadow: 2px 2px 4px #3a3a3a;
 }
 
 .task-entry {
   display: grid;
-  grid-template-columns: 2fr 0.25fr 0.4fr 0.4fr;
+  grid-template-columns: 645px 40px 60px 30px;
   height: auto;
-  width: 1000px;
   align-items: center;
 }
 
 .task-entry-values {
   display: grid;
-  grid-template-columns: 0.3fr 0.8fr 0.3fr 0.6fr;
+  grid-template-columns: 65px 280px 100px 200px;
   height: auto;
   width: auto;
 }
 
-.task-title {
-  margin: 10px 0 10px 0;
-  padding: 0 0 5px 0;
-  border-style: solid;
-  border-width: 0 0 2px 0;
-  border-color: rgb(156, 156, 156);
-  font-weight: bolder;
-  font-size: x-large;
+.task-index-entry {
+  margin-left: 12px;
 }
 
 .task-checkbox {
-  width: 70px;
+  display: none;
 }
 
-.task-column-header {
-  font-weight: bold;
+.custom-checkbox {
+  justify-self: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .task-complete {
@@ -49,8 +46,9 @@
   border: none;
   border-radius: 11px;
   background-color: transparent;
-  max-width: 20px;
-  max-height: 20px;
+  justify-self: center;
+  max-width: 22px;
+  max-height: 22px;
   padding: 0;
   margin: 0 5px 0 5px;
 }
@@ -60,6 +58,7 @@
 }
 
 .edit-remove-icon {
-  max-width: 20px;
+  justify-self: center;
+  max-width: 22px;
   cursor: pointer;
 }

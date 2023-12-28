@@ -48,22 +48,26 @@ function TaskCreateForm(props) {
         <input
           type="text"
           name="taskName"
-          placeholder="Rename Task"
+          className="create-input-box task-name-input"
+          placeholder={formType === "edit" ? "Rename Task" : "Enter Task Name"}
           onChange={handleInputChange}
         />
         <select
           name="taskPriority"
           onChange={handleInputChange}
           defaultValue="Low"
+          className="create-select-input-box"
         >
-          <option value="Low">Change</option>
+          <option value="Low">
+            {formType === "edit" ? "Change" : "Priority"}
+          </option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
-
         <DatePicker
-          className="my-custom-datepicker"
+          portalId="root-portal"
+          className="my-custom-datepicker create-input-box"
           type="date"
           name="dueDate"
           selected={taskForm.dueDate}
@@ -75,24 +79,36 @@ function TaskCreateForm(props) {
           dateFormat="dd/MM/yyyy h:mm a"
           showTimeInput
         />
-        <div />
-        <button
-          className={formType === "edit" && "confirm-cancel-button"}
-          onClick={(event) => {
-            handleSubmit(event);
-            formType === "edit" && closeEdit(false);
-          }}
-        >
-          {formType === "edit" ? (
+        {formType === "edit" ? (
+          <button
+            className={
+              formType === "edit"
+                ? "confirm-cancel-button"
+                : "hide-confirm-cancel-button"
+            }
+            onClick={(event) => {
+              handleSubmit(event);
+              formType === "edit" && closeEdit(false);
+            }}
+          >
             <img
               className="confirm-cancel-icon"
               alt="check-icon"
               src={checkIcon}
             />
-          ) : (
-            "Create Task"
-          )}
-        </button>
+          </button>
+        ) : (
+          <button
+            className="create-task-button"
+            onClick={(event) => {
+              handleSubmit(event);
+            }}
+            value="Create Task"
+          >
+            Create Task
+          </button>
+        )}
+
         {formType === "edit" && (
           <button
             className="confirm-cancel-button"

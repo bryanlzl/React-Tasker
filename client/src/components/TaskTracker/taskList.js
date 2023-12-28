@@ -25,7 +25,31 @@ function TaskList(props) {
     return dueDate2 - dueDate1;
   };
   const [currSort, setCurrSort] = useState("index");
-
+  const highlightTaskHeader = (sortType) => {
+    let cssHeaderSort = String();
+    switch (currSort) {
+      case "index":
+        cssHeaderSort = "index-header-sort";
+        break;
+      case "task":
+        cssHeaderSort = "task-name-header-sort";
+        break;
+      case "priority":
+        cssHeaderSort = "priority-header-sort";
+        break;
+      case "dueDate":
+        cssHeaderSort = "date-header-sort";
+        break;
+      case "completed":
+        cssHeaderSort = "completed-header-sort";
+        break;
+      default:
+        break;
+    }
+    return currSort === sortType
+      ? `task-header-sort ${cssHeaderSort}`
+      : "task-header";
+  };
   const renderSortArrow = (sortType) => {
     return (
       currSort === sortType &&
@@ -94,7 +118,7 @@ function TaskList(props) {
     <div className="task-list">
       <div className={"task-entry-header task-column-header"}>
         <div
-          className="task-header"
+          className={highlightTaskHeader("index")}
           onClick={() => {
             setSortState((prev) => {
               return { ...prev, index: !prev["index"] };
@@ -106,7 +130,7 @@ function TaskList(props) {
           {renderSortArrow("index")}
         </div>
         <div
-          className="task-header"
+          className={highlightTaskHeader("task")}
           onClick={() => {
             setSortState((prev) => {
               return { ...prev, task: !prev["task"] };
@@ -118,7 +142,7 @@ function TaskList(props) {
           {renderSortArrow("task")}
         </div>
         <div
-          className="task-header"
+          className={highlightTaskHeader("priority")}
           onClick={() => {
             setSortState((prev) => {
               return { ...prev, priority: !prev["priority"] };
@@ -130,7 +154,7 @@ function TaskList(props) {
           {renderSortArrow("priority")}
         </div>
         <div
-          className="task-header"
+          className={highlightTaskHeader("dueDate")}
           onClick={() => {
             setSortState((prev) => {
               return { ...prev, dueDate: !prev["dueDate"] };
@@ -142,7 +166,7 @@ function TaskList(props) {
           {renderSortArrow("dueDate")}
         </div>
         <div
-          className="task-header"
+          className={highlightTaskHeader("completed")}
           onClick={() => {
             setSortState((prev) => {
               return { ...prev, completed: !prev["completed"] };
@@ -150,7 +174,7 @@ function TaskList(props) {
             setCurrSort("completed");
           }}
         >
-          Done
+          <p className="task-done-header">Done</p>
           {renderSortArrow("completed")}
         </div>
       </div>

@@ -2,28 +2,33 @@
 
 .task-edit-form {
   display: grid;
-  grid-template-columns: 0.3fr 0.8fr 0.3fr 0.6fr 0.25fr 0.4fr 0.4fr;
+  grid-template-columns: 65px 280px 100px 200px 40px 60px;
   height: auto;
-  width: 1000px;
-  margin: 5px 0 5px 0;
+  margin: 2px 0 0 0;
+  align-items: center;
 }
 
 .task-create-form {
   display: grid;
-  grid-template-columns: 0.3fr 0.8fr 0.3fr 0.6fr 0.25fr 0.4fr 0.4fr;
+  grid-template-columns: 65px 280px 100px 190px 150px;
   height: auto;
-  width: 1000px;
   margin: 20px 0 20px 0;
+  align-items: center;
 }
 
 .confirm-cancel-button {
   border: none;
   border-radius: 11px;
   background-color: transparent;
-  max-width: 20px;
-  max-height: 20px;
+  justify-self: center;
+  max-width: 22px;
+  max-height: 22px;
   padding: 0;
   margin: 0 5px 0 5px;
+}
+
+.hide-confirm-cancel-button {
+  display: none;
 }
 
 .confirm-cancel-button:hover {
@@ -31,8 +36,65 @@
 }
 
 .confirm-cancel-icon {
-  max-width: 20px;
+  max-width: 22px;
   border-radius: 11px;
   padding: 0;
   cursor: pointer;
+}
+
+.create-input-box {
+  height: 24px;
+  padding: 0;
+  text-indent: 5px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-color: var(--color2);
+  color: rgb(93, 93, 93);
+}
+
+.create-input-box:focus {
+  outline: none;
+  border: 2px solid var(--color4);
+}
+
+.create-select-input-box {
+  height: 28px;
+  width: 90px;
+  padding: 0;
+  text-indent: 5px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: var(--color2);
+  color: rgb(93, 93, 93);
+}
+
+.create-select-input-box:focus {
+  outline: none;
+  border: 2px solid var(--color4);
+}
+
+.task-name-input {
+  width: 270px;
+}
+
+.task-date-input {
+  width: 190px;
+}
+
+.create-task-button {
+  height: 28px;
+  width: 150px;
+  padding: 0;
+  text-indent: 5px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: var(--color1);
+  color: rgb(93, 93, 93);
+  font-weight: bold;
+  justify-self: center;
+  cursor: pointer;
+}
+
+.create-task-button:hover {
+  background-color: rgb(169, 251, 255);
 }
