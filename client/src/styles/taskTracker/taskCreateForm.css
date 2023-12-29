@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 65px 280px 100px 190px 150px;
   height: auto;
-  margin: 12px 0 12px 0;
+  margin: 12px 0 5px 0;
   align-items: center;
 }
 
