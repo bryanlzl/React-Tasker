@@ -14,10 +14,6 @@
   margin: 0 10px 0 10px;
 }
 
-.task-save-change {
-  margin: 10px 0 10px 10px;
-}
-
 .task-title {
   margin: 10px 0 10px 0;
   padding: 0 0 5px 0;
@@ -26,4 +22,51 @@
   border-color: rgb(0, 0, 0);
   font-weight: bolder;
   font-size: x-large;
+}
+
+.task-save-change-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  width: 500px;
+}
+
+.task-save-change {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  margin: 5px 0 5px 0px;
+  width: 300px;
+}
+
+.save-change-button,
+.discard-change-button {
+  height: 28px;
+  width: 130px;
+  padding: 0;
+  text-indent: 5px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: var(--color1);
+  color: rgb(93, 93, 93);
+  font-weight: bold;
+  justify-self: center;
+  cursor: pointer;
+  text-align: center;
+}
+
+.save-change-button:hover {
+  background-color: #56ff9a;
+}
+
+.discard-change-button:hover {
+  background-color: #ffb2b2;
+}
+
+.save-status-message {
+  font-weight: bold;
+  color: aliceblue;
+  margin: 0;
+  text-align: center;
 }

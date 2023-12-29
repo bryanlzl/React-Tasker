@@ -1,6 +1,27 @@
 :root {
+  --color1: #fffbf5;
+  --color2: #f7efe5;
+  --color3: #c3acd0;
+  --color4: #7743db;
+}
+
+:root {
+  --color1: #dfcdbf;
+  --color2: #ded0b6;
+  --color3: #faeed1;
+  --color4: #607274;
+}
+
+:root {
+  --color1: #f8edff;
+  --color2: #bfcfe7;
+  --color3: #525ceb;
+  --color4: #3d3b40;
+}
+
+:root {
   --color1: #eef5ff;
   --color2: #deecff;
-  --color3: #86b6f6;
+  --color3: #789dce;
   --color4: #176b87;
 }

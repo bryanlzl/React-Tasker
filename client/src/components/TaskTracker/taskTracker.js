@@ -5,6 +5,30 @@ import "../../styles/taskTracker/taskTracker.css";
 
 function TaskTracker() {
   const [tasks, setTasks] = useState({});
+  const [saveMessage, setSaveMessage] = useState({
+    visible: false,
+    message: "Task List Saved!",
+  });
+  const saveMessageHandler = (saveType) => {
+    setSaveMessage((prev) => {
+      return {
+        visible: true,
+        message: `${
+          saveType === "save" ? "Task List Saved!" : "Changes Discarded"
+        }`,
+      };
+    });
+    const timeOut = setTimeout(() => {
+      setSaveMessage((prev) => {
+        return { ...prev, visible: false };
+      });
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  };
+
   const saveChangeHandler = () => {
     axios
       .post("http://localhost:5000/api/tasks/update", tasks)
@@ -66,6 +90,8 @@ function TaskTracker() {
     fetchDBTasks();
   }, []);
 
+  useEffect(() => {}, []);
+
   return (
     <div className="task-tracker">
       <div className="task-tracker-content">
@@ -74,9 +100,30 @@ function TaskTracker() {
           taskList={tasks}
           taskChangeHandler={taskChangeHandler}
         ></TaskList>
-        <div className="task-save-change">
-          <button onClick={saveChangeHandler}>Save Changes</button>
-          <button onClick={fetchDBTasks}>Discard Changes</button>
+        <div className="task-save-change-bar">
+          <div className="task-save-change">
+            <button
+              className="save-change-button"
+              onClick={() => {
+                saveChangeHandler();
+                saveMessageHandler("save");
+              }}
+            >
+              Save Change
+            </button>
+            <button
+              className="discard-change-button"
+              onClick={() => {
+                fetchDBTasks();
+                saveMessageHandler("cancel");
+              }}
+            >
+              Discard Change
+            </button>
+          </div>
+          {saveMessage.visible && (
+            <p className="save-status-message">{saveMessage.message}</p>
+          )}
         </div>
       </div>
     </div>
