@@ -39,6 +39,10 @@
   cursor: pointer;
 }
 
+.custom-checkbox:hover {
+  background-color: var(--color4);
+}
+
 .task-complete {
   text-decoration: line-through;
 }

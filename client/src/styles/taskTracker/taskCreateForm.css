@@ -66,6 +66,7 @@
   border: 1px solid transparent;
   background-color: var(--color2);
   color: rgb(93, 93, 93);
+  cursor: pointer;
 }
 
 .create-select-input-box:focus {
